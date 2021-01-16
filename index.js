@@ -22,13 +22,13 @@ const getArrayClone = (arr) => {
 }
 
 /**
- * This function returns a number of living cells surrounding the cell on given index currentI and currentJ
- * @param {array} input array of arrays representing the world
- * @param {number} currentI index of row
- * @param {number} currentJ index of cell in the row
- * @param {number} maxI maximum index of row that can be used
- * @param {number} maxJ maximum index of element in the row that can be used
- * @returns {number} Number of living cells surrounding the cell on given index currentI and currentJ
+ * This function returns a number of living cells surrounding the cell on given index currentI and currentJ.
+ * @param {array} input - Array of arrays representing the world.
+ * @param {number} currentI - Index of row.
+ * @param {number} currentJ - Index of cell in the row.
+ * @param {number} maxI - Maximum index of row that can be used.
+ * @param {number} maxJ - Maximum index of element in the row that can be used.
+ * @returns {number} Number of living cells surrounding the cell on given index currentI and currentJ.
  */
 const getAmountOfAliveSurroundings = (input, currentI, currentJ, maxI, maxJ) => {
     let neighboursAlive = 0;
@@ -63,9 +63,9 @@ const getAmountOfAliveSurroundings = (input, currentI, currentJ, maxI, maxJ) => 
 }
 
 /**
- * Calculates whether cell should be alive or not in the new world based on number of living neighbours
- * @param {number} representing boolean whether cell is currently alive or not
- * @param {number} liveNeighbours
+ * Calculates whether cell should be alive or not in the new world based on number of living neighbours.
+ * @param {number} cell - Number representing boolean whether cell is currently alive or not.
+ * @param {number} liveNeighbours - Number of neighbours of given cell that are alive.
  * @returns {number}
  */
 const getNextStateOfCell = (cell, liveNeighbours) => {
@@ -86,9 +86,9 @@ const getNextStateOfCell = (cell, liveNeighbours) => {
 }
 
 /**
- * One game cycle
- * @param {array} input world represented as array of arrays of booleans where each boolean represents whether cell is alive or not
- * @returns {array} world represented as array of arrays of booleans where each boolean represents whether cell is alive or not
+ * One game cycle.
+ * @param {array} input - World represented as array of arrays of booleans where each boolean represents whether cell is alive or not.
+ * @returns {array} World represented as array of arrays of booleans where each boolean represents whether cell is alive or not.
  */
 const gameTick = (input) => {
     const newWorld = getArrayClone(input);
@@ -101,9 +101,8 @@ const gameTick = (input) => {
         for (let j = 0; j < maxJ; j++) {
             const currentCell = currentRow[j];
             const liveNeighbours = getAmountOfAliveSurroundings(input, i, j, maxI, maxJ);
-            const nextStateOfCell = getNextStateOfCell(currentCell, liveNeighbours);
 
-            newWorld[i][j] = nextStateOfCell;
+            newWorld[i][j] = getNextStateOfCell(currentCell, liveNeighbours);
         }
     }
     return newWorld;
